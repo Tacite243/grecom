@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import 'animate.css';
+import LightButtonLink from "./button_light";
 
 
 
@@ -35,12 +36,7 @@ const Hero: React.FC = () => {
                             dans la production et la vente des produits apicoles
                             et agricoles en République Démocratique du Congo.
                         </p>
-                        <a
-                            href="#about"
-                            className="btn-get-started animate__animated animate__fadeInUp scrollto"
-                        >
-                            En savoir plus
-                        </a>
+                        <LightButtonLink link="#about" text="En savoir plus" />
                     </div>
                 </div>
 
@@ -73,7 +69,7 @@ const Hero: React.FC = () => {
                             Nyuki Academy
                         </h2>
                         <p className="animate__animated animate__fadeInUp">
-                            Une école d'apprentissage des techniques apicoles modernes : 
+                            Une école d'apprentissage des techniques apicoles modernes :
                             Utilisation de la technologie pour une apiculture innovante et durable
                         </p>
                         <a

@@ -21,7 +21,7 @@ const CallToAction: React.FC = () => {
             </p>
           </div>
           <div className="col-xl-3 cta-btn-container text-center">
-            <Link className="cta-btn align-middle" href="#">
+            <Link className="cta-btn align-middle" href="#contact">
               Cliquez ici
             </Link>
           </div>

@@ -1,10 +1,11 @@
 'use client';
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import '../styles/globals.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+
 import CallToAction from "@/components/callToAction";
 import TestimonialsSection from "@/components/tesitmonials";
 import Pricing from "@/components/pricing";
@@ -19,11 +20,13 @@ import Features from "@/components/features";
 import Portfolio from "@/components/portfolio";
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     require('bootstrap/dist/js/bootstrap.bundle.min.js');
   }, []);
-  useEffect(() => {
 
+  useEffect(() => {
     AOS.init({
       duration: 500,
       once: true,
@@ -31,9 +34,23 @@ export default function Home() {
       delay: 100,
       offset: 200,
     });
-  })
+
+    // Simulate a loading process
+    const timer = setTimeout(() => {
+      setLoading(false);
+      document.body.classList.add('loaded'); // Hide the loader
+    }, 1500); // Loader duration in ms
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
+      {loading && (
+        <div id="preloader">
+          <div className="spinner"></div>
+        </div>
+      )}
       <main className="main">
         <Hero />
         <About />
@@ -41,10 +58,7 @@ export default function Home() {
         <CallToAction />
         <Services />
         <Portfolio />
-        {/* <Team /> */}
         <TestimonialsSection />
-        {/* <Pricing /> */}
-        {/* <Faq /> */}
         <RecentPosts />
         <Contact />
       </main>
