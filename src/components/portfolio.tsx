@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import Isotope from 'isotope-layout';
-import GLightbox from 'glightbox';
+// import Isotope from 'isotope-layout';
+// import GLightbox from 'glightbox';
 import 'glightbox/dist/css/glightbox.css';
 
 const products = [
@@ -18,29 +18,57 @@ const products = [
 ];
 
 const Portfolio: React.FC = () => {
+  const [isotopeInstance, setIsotopeInstance] = useState<any>(null);
+  const [glightbox, setGlightbox] = useState<any>(null);
+
   useEffect(() => {
-    AOS.init({ duration: 600, easing: 'ease-in-out', once: true, mirror: false });
-    const glightbox = GLightbox({ selector: '.glightbox' });
+    let isoInstance: any = null;
 
-    const isotopeContainers = document.querySelectorAll('.isotope-layout');
-    isotopeContainers.forEach((container) => {
-      const isotopeInstance = new Isotope(container.querySelector('.isotope-container') as HTMLElement, {
-        itemSelector: '.isotope-item',
-        layoutMode: 'masonry',
-        filter: '*',
-      });
+    const initIsotope = async () => {
+      if (typeof window !== 'undefined') {
+        const IsotopeLayout = (await import('isotope-layout')).default;
+        const container = document.querySelector('.isotope-container') as HTMLElement;
+        
+        if (container) {
+          isoInstance = new IsotopeLayout(container, {
+            itemSelector: '.isotope-item',
+            layoutMode: 'masonry',
+            filter: '*'
+          });
+          
+          setIsotopeInstance(isoInstance);
 
-      container.querySelectorAll('.isotope-filters li').forEach((filter) => {
-        filter.addEventListener('click', function () {
-          container.querySelector('.filter-active')?.classList.remove('filter-active');
-          (this as HTMLElement).classList.add('filter-active');
-          const filterValue = (this as HTMLElement).getAttribute('data-filter') || '*';
-          isotopeInstance.arrange({ filter: filterValue });
-        });
-      });
-    });
+          document.querySelectorAll('.isotope-filters li').forEach((filter) => {
+            filter.addEventListener('click', function (this: HTMLElement) {
+              document.querySelector('.filter-active')?.classList.remove('filter-active');
+              this.classList.add('filter-active');
+              const filterValue = this.getAttribute('data-filter') || '*';
+              isoInstance.arrange({ filter: filterValue });
+            });
+          });
+        }
+      }
+    };
 
-    return () => glightbox.destroy();
+    const initGlightbox = async () => {
+      if (typeof window !== 'undefined') {
+        const GLightbox = (await import('glightbox')).default;
+        const glightboxInstance = GLightbox({ selector: '.glightbox' });
+        setGlightbox(glightboxInstance);
+      }
+    };
+
+    // Attendez que le DOM soit complètement chargé
+    setTimeout(() => {
+      initIsotope();
+      initGlightbox();
+      AOS.init({ duration: 600, easing: 'ease-in-out', once: true, mirror: false });
+    }, 0);
+
+    return () => {
+      if (glightbox) glightbox.destroy();
+      if (isoInstance) isoInstance.destroy();
+    };
   }, []);
 
   // Extract unique categories dynamically
