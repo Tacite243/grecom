@@ -15,7 +15,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-
+  
   // Vérifiez si nous sommes dans le navigateur
   const isBrowser = typeof window !== 'undefined';
 
@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="fr">
       <body className="index-page">
         <Header />
-        {children}
+        {isBrowser && children}
         <Footer />
       </body>
     </html>
