@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 
 interface TeamMember {
@@ -79,7 +80,7 @@ const Team: React.FC = () => {
                         >
                             <div className="team-member">
                                 <div className="member-img">
-                                    <img src={member.imageUrl} className="img-fluid" alt={`${member.name}`} />
+                                    <Image src={member.imageUrl} className="img-fluid" alt={`${member.name}`} layout="fill" />
                                     <div className="social">
                                         <Link href={member.socialLinks.twitter}><i className="bi bi-twitter"></i></Link>
                                         <Link href={member.socialLinks.facebook}><i className="bi bi-facebook"></i></Link>

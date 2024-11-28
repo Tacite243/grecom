@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 
 interface Post {
@@ -67,14 +68,14 @@ const RecentPosts: React.FC = () => {
             >
               <article>
                 <div className="post-img">
-                  <img src={post.imageUrl} alt={post.title} className="img-fluid" />
+                  <Image src={post.imageUrl} alt={post.title} className="img-fluid" layout="fill" />
                 </div>
                 <p className="post-category">{post.category}</p>
                 <h2 className="title">
                   <Link href={post.link}>{post.title}</Link>
                 </h2>
                 <div className="d-flex align-items-center">
-                  <img src={post.authorImage} alt={post.authorName} className="img-fluid post-author-img flex-shrink-0" />
+                  <Image src={post.authorImage} alt={post.authorName} className="img-fluid post-author-img flex-shrink-0" layout="fill" />
                   <div className="post-meta">
                     <p className="post-author">{post.authorName}</p>
                     <p className="post-date">

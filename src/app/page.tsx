@@ -5,12 +5,13 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import '../styles/globals.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import CallToAction from "@/components/callToAction";
 import TestimonialsSection from "@/components/tesitmonials";
-import Pricing from "@/components/pricing";
-import Faq from "@/components/faq";
-import Team from "@/components/team";
+// import Pricing from "@/components/pricing";
+// import Faq from "@/components/faq";
+// import Team from "@/components/team";
 import RecentPosts from "@/components/posts";
 import Contact from "@/components/contact";
 import Hero from "@/components/hero";
@@ -23,10 +24,6 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    require('bootstrap/dist/js/bootstrap.bundle.min.js');
-  }, []);
-
-  useEffect(() => {
     AOS.init({
       duration: 500,
       once: true,
@@ -34,12 +31,11 @@ export default function Home() {
       delay: 100,
       offset: 200,
     });
-
-    // Simulate a loading process
+    
     const timer = setTimeout(() => {
       setLoading(false);
-      document.body.classList.add('loaded'); // Hide the loader
-    }, 1500); // Loader duration in ms
+      document.body.classList.add('loaded');
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);

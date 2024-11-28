@@ -48,9 +48,9 @@ const Hero: React.FC = () => {
                         </h2>
                         <p className="animate__animated animate__fadeInUp">
                             NYUKI TECH est une plateforme numérique visant à
-                            améliorer et enrichir l'industrie apicole en fournissant
+                            améliorer et enrichir l&apos;industrie apicole en fournissant
                             des conseils, des itinéraires techniques et des informations
-                            sur le marché. Son objectif principal est l'identification
+                            sur le marché. Son objectif principal est l&apos;identification
                             et enregistrement des acteurs dans la chaîne de valeur apicole.
                         </p>
                         <a
@@ -69,7 +69,7 @@ const Hero: React.FC = () => {
                             Nyuki Academy
                         </h2>
                         <p className="animate__animated animate__fadeInUp">
-                            Une école d'apprentissage des techniques apicoles modernes :
+                            Une école d&apos;apprentissage des techniques apicoles modernes :
                             Utilisation de la technologie pour une apiculture innovante et durable
                         </p>
                         <a

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-// import Isotope from 'isotope-layout';
-// import GLightbox from 'glightbox';
+import Isotope from 'isotope-layout';
+import GLightbox from 'glightbox';
 import 'glightbox/dist/css/glightbox.css';
+import Image from 'next/image';
 
 const products = [
   { category: 'App', filter: 'filter-app', img: 'masonry-portfolio-1.jpg', title: 'App 1', desc: 'Lorem ipsum, dolor sit' },
@@ -18,25 +19,25 @@ const products = [
 ];
 
 const Portfolio: React.FC = () => {
-  const [isotopeInstance, setIsotopeInstance] = useState<any>(null);
-  const [glightbox, setGlightbox] = useState<any>(null);
+  const [isotopeInstance, setIsotopeInstance] = useState<Isotope | null>(null);
+  const [glightbox, setGlightbox] = useState<ReturnType<typeof GLightbox> | null>(null);
 
   useEffect(() => {
-    let isoInstance: any = null;
+    let isoInstance: Isotope;
 
     const initIsotope = async () => {
       if (typeof window !== 'undefined') {
         const IsotopeLayout = (await import('isotope-layout')).default;
         const container = document.querySelector('.isotope-container') as HTMLElement;
-        
+
         if (container) {
           isoInstance = new IsotopeLayout(container, {
             itemSelector: '.isotope-item',
             layoutMode: 'masonry',
             filter: '*'
           });
-          
-          setIsotopeInstance(isoInstance);
+
+          setIsotopeInstance(isotopeInstance);
 
           document.querySelectorAll('.isotope-filters li').forEach((filter) => {
             filter.addEventListener('click', function (this: HTMLElement) {
@@ -69,7 +70,7 @@ const Portfolio: React.FC = () => {
       if (glightbox) glightbox.destroy();
       if (isoInstance) isoInstance.destroy();
     };
-  }, []);
+  }, [isotopeInstance, glightbox]);
 
   // Extract unique categories dynamically
   const categories = Array.from(new Set(products.map((product) => product.category))).map((category) => ({
@@ -98,7 +99,7 @@ const Portfolio: React.FC = () => {
           <div className="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
             {products.map((product, index) => (
               <div key={index} className={`col-lg-4 col-md-6 portfolio-item isotope-item ${product.filter}`}>
-                <img src={`/img/masonry-portfolio/${product.img}`} className="img-fluid" alt={product.title} />
+                <Image src={`/img/masonry-portfolio/${product.img}`} className="img-fluid" alt={product.title} layout="fill" />
                 <div className="portfolio-info">
                   <h4>{product.title}</h4>
                   <p>{product.desc}</p>

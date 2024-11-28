@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Image from 'next/image';
 
 const Features: React.FC = () => {
   useEffect(() => {
@@ -50,7 +51,7 @@ const Features: React.FC = () => {
                   </ul> */}
                 </div>
                 <div className="col-lg-6 order-1 order-lg-2 text-center">
-                  <img src={tab.img} alt="Illustration" className="img-fluid" />
+                  <Image src={tab.img} alt="Illustration" className="img-fluid" layout="fill" />
                 </div>
               </div>
             </div>

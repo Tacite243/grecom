@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Image from 'next/image';
 
 const TestimonialsSection: React.FC = () => {
   useEffect(() => {
@@ -31,7 +32,7 @@ const TestimonialsSection: React.FC = () => {
           {testimonials.map((testimonial, index) => (
             <SwiperSlide key={index}>
               <div className="testimonial-item">
-                <img src={testimonial.imgSrc} className="testimonial-img" alt={testimonial.name} />
+                <Image src={testimonial.imgSrc} className="testimonial-img" alt={testimonial.name} layout="fill" />
                 <h3>{testimonial.name}</h3>
                 {/* <h4>{testimonial.role}</h4> */}
                 <div className="stars">
