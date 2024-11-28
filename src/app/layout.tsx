@@ -17,13 +17,13 @@ export default function RootLayout({
 }) {
   
   // Vérifiez si nous sommes dans le navigateur
-  const isBrowser = typeof window !== 'undefined';
+  // const isBrowser = typeof window !== 'undefined';
 
   return (
     <html lang="fr">
       <body className="index-page">
         <Header />
-        {isBrowser && children}
+        {children}
         <Footer />
       </body>
     </html>
