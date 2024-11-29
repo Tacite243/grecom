@@ -1,23 +1,42 @@
-import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { useEffect } from "react";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import 'animate.css';
+import React, { useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import "animate.css";
 import LightButtonLink from "./button_light";
 
-
+const slides = [
+    {
+        title: "Bienvenue sur Grecom",
+        description:
+            "Grecom Community Mind est une entreprise spécialisée dans la production et la vente des produits apicoles et agricoles en République Démocratique du Congo.",
+        button: { link: "#about", text: "En savoir plus" },
+    },
+    {
+        title: "Nyuki Tech",
+        description:
+            "NYUKI TECH est une plateforme numérique visant à améliorer et enrichir l'industrie apicole en fournissant des conseils, des itinéraires techniques et des informations sur le marché. Son objectif principal est l'identification et enregistrement des acteurs dans la chaîne de valeur apicole.",
+        button: { link: "#about", text: "En savoir plus" },
+    },
+    {
+        title: "Nyuki Academy",
+        description:
+            "Une école d'apprentissage des techniques apicoles modernes : Utilisation de la technologie pour une apiculture innovante et durable",
+        button: { link: "#about", text: "En savoir plus" },
+    },
+];
 
 const Hero: React.FC = () => {
     useEffect(() => {
         AOS.init({
             duration: 500,
             once: true,
-            easing: 'ease-in-out',
+            easing: "ease-in-out",
             delay: 100,
             offset: 200,
         });
-    })
+    }, []);
+
     return (
         <section id="hero" className="hero section dark-background">
             <div
@@ -26,60 +45,25 @@ const Hero: React.FC = () => {
                 data-bs-ride="carousel"
                 data-bs-interval="5000"
             >
-                <div className="carousel-item active">
-                    <div className="carousel-container">
-                        <h2 className="animate__animated animate__fadeInDown">
-                            Bienvenue sur <span>Grecom</span>
-                        </h2>
-                        <p className="animate__animated animate__fadeInUp">
-                            Grecom Community Mind est une entreprise spécialisée
-                            dans la production et la vente des produits apicoles
-                            et agricoles en République Démocratique du Congo.
-                        </p>
-                        <LightButtonLink link="#about" text="En savoir plus" />
+                {slides.map((slide, index) => (
+                    <div
+                        className={`carousel-item ${index === 0 ? "active" : ""}`}
+                        key={index}
+                    >
+                        <div className="carousel-container">
+                            <h2 className="animate__animated animate__fadeInDown">
+                                {slide.title}
+                            </h2>
+                            <p className="animate__animated animate__fadeInUp">
+                                {slide.description}
+                            </p>
+                            <LightButtonLink
+                                link={slide.button.link}
+                                text={slide.button.text}
+                            />
+                        </div>
                     </div>
-                </div>
-
-
-                <div className="carousel-item">
-                    <div className="carousel-container">
-                        <h2 className="animate__animated animate__fadeInDown">
-                            Nyuki Tech
-                        </h2>
-                        <p className="animate__animated animate__fadeInUp">
-                            NYUKI TECH est une plateforme numérique visant à
-                            améliorer et enrichir l'industrie apicole en fournissant
-                            des conseils, des itinéraires techniques et des informations
-                            sur le marché. Son objectif principal est l'identification
-                            et enregistrement des acteurs dans la chaîne de valeur apicole.
-                        </p>
-                        <a
-                            href="#about"
-                            className="btn-get-started animate__animated animate__fadeInUp scrollto"
-                        >
-                            En savoir plus
-                        </a>
-                    </div>
-                </div>
-
-                {/* Slide 3 */}
-                <div className="carousel-item">
-                    <div className="carousel-container">
-                        <h2 className="animate__animated animate__fadeInDown">
-                            Nyuki Academy
-                        </h2>
-                        <p className="animate__animated animate__fadeInUp">
-                            Une école d'apprentissage des techniques apicoles modernes :
-                            Utilisation de la technologie pour une apiculture innovante et durable
-                        </p>
-                        <a
-                            href="#about"
-                            className="btn-get-started animate__animated animate__fadeInUp scrollto"
-                        >
-                            En savoir plus
-                        </a>
-                    </div>
-                </div>
+                ))}
 
                 {/* Controls */}
                 <a
