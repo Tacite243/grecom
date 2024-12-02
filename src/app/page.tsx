@@ -14,7 +14,7 @@ import CallToAction from "@/components/callToAction";
 import TestimonialsSection from "@/components/tesitmonials";
 // import Pricing from "@/components/pricing";
 // import Faq from "@/components/faq";
-// import Team from "@/components/team";
+import Team from "@/components/team";
 import RecentPosts from "@/components/posts";
 import Contact from "@/components/contact";
 import Hero from "@/components/hero";
@@ -43,8 +43,8 @@ export default function Home() {
     // Simulate a loading process
     const timer = setTimeout(() => {
       setLoading(false);
-      document.body.classList.add('loaded'); // Hide the loader
-    }, 1500); // Loader duration in ms
+      document.body.classList.add('loaded');
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -65,6 +65,7 @@ export default function Home() {
         <Portfolio />
         <TestimonialsSection />
         <RecentPosts />
+        <Team />
         <Contact />
       </main>
       <Footer />
