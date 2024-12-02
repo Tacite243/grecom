@@ -1,0 +1,21 @@
+[
+    {
+      "id": 1,
+      "title": "Bienvenue sur Grecom",
+      "description": "Grecom Community Mind est une entreprise spécialisée dans la production et la vente des produits apicoles.",
+      "button": {
+        "link": "#about",
+        "text": "En savoir plus"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Nyuki Tech",
+      "description": "Une plateforme numérique pour enrichir l'industrie apicole.",
+      "button": {
+        "link": "#about",
+        "text": "En savoir plus"
+      }
+    }
+  ]
+  

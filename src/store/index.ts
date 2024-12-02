@@ -1,8 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './authSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import slidesReducer from "./slidesSlice";
 
 const store = configureStore({
   reducer: {
+    slides: slidesReducer,
     auth: authReducer,
   },
 });
