@@ -8,8 +8,8 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  // Observer pour détecter la section active
   useEffect(() => {
-    // Observer pour détecter les sections visibles
     const sections = document.querySelectorAll("section");
     const observer = new IntersectionObserver(
       (entries) => {
@@ -26,25 +26,33 @@ export default function Header() {
     return () => observer.disconnect();
   }, []);
 
+  // Gestion du défilement pour l'effet glass
   useEffect(() => {
-    // Écouteur pour ajouter ou supprimer la classe `scrolled`
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Toggle du menu mobile
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen((prev) => !prev);
+    setIsMobileMenuOpen((prev) => {
+      const newState = !prev;
+      const navMenu = document.getElementById("navmenu");
+      const ul = document.getElementsByTagName("ul")[0];
+      
+      if (navMenu && ul) {
+        navMenu.style.height = newState ? "100vh" : "";
+        ul.style.backgroundColor = "green";
+      }
+      return newState;
+    });
     document.body.classList.toggle("mobile-nav-active", !isMobileMenuOpen);
   };
 
+  // Fermeture du menu mobile
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
     document.body.classList.remove("mobile-nav-active");
@@ -53,16 +61,20 @@ export default function Header() {
   return (
     <header
       id="header"
-      className={`header d-flex align-items-center fixed-top ${
-        isScrolled ? "scrolled" : ""
-      }`}
+      className={`header d-flex align-items-center fixed-top ${isScrolled ? "scrolled" : ""
+        }`}
     >
       <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
+        {/* Logo */}
         <Link href="/" className="logo d-flex align-items-center">
           <h1 className="sitename">GRECOM</h1>
         </Link>
 
-        <nav id="navmenu" className="navmenu">
+        {/* Menu de navigation */}
+        <nav
+          id="navmenu"
+          className={`navmenu ${isMobileMenuOpen ? "open" : ""}`}
+        >
           <ul>
             {[
               { href: "#hero", label: "Acceuil" },
@@ -85,11 +97,10 @@ export default function Header() {
           </ul>
         </nav>
 
-        {/* Toggle button */}
+        {/* Bouton de bascule visible uniquement sur mobile */}
         <i
-          className={`mobile-nav-toggle bi ${
-            isMobileMenuOpen ? "bi-x-lg" : "bi-list"
-          }`}
+          className={`mobile-nav-toggle bi ${isMobileMenuOpen ? "bi-x-lg" : "bi-list"
+            }`}
           onClick={toggleMobileMenu}
         ></i>
       </div>

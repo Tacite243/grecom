@@ -30,21 +30,22 @@ const TestimonialsSection: React.FC = () => {
         >
           {testimonials.map((testimonial, index) => (
             <SwiperSlide key={index}>
-              <div className="testimonial-item">
-                <img src={testimonial.imgSrc} className="testimonial-img" alt={testimonial.name} />
-                <h3>{testimonial.name}</h3>
-                {/* <h4>{testimonial.role}</h4> */}
-                <div className="stars">
-                  {[...Array(5)].map((_, i) => (
-                    <i key={i} className="bi bi-star-fill"></i>
-                  ))}
+              <article className="testimonial-item">
+                {/* Image */}
+                <div className="post-img">
+                  <img src={testimonial.imgSrc} alt={testimonial.name} className="img-fluid" />
                 </div>
-                <p>
-                  <i className="bi bi-quote quote-icon-left"></i>
-                  <span>{testimonial.quote}</span>
-                  <i className="bi bi-quote quote-icon-right"></i>
-                </p>
-              </div>
+                {/* Category or name */}
+                <p className="post-category">{testimonial.name}</p>
+                {/* Title */}
+                <h2 className="title">
+                  <span>{testimonial.name}</span>
+                </h2>
+                {/* Quote */}
+                <div className="post-meta">
+                  <p>{testimonial.quote}</p>
+                </div>
+              </article>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -54,37 +55,21 @@ const TestimonialsSection: React.FC = () => {
   );
 };
 
-
 const testimonials = [
   {
     imgSrc: '/img/testimonials/ruche.jpg',
     name: 'RUCHES CONNECTÉES',
-    // role: 'CEO & Founder',
     quote: "Un produit innovant pour le suivi à distance de l'évolution de la ruche : Surveillance de la température, de l'humidité, de la métrologie et du mouvement",
   },
   {
     imgSrc: '/img/testimonials/academy.jpg',
     name: 'NYUKI ACADEMY',
-    // role: 'Designer',
     quote: "Une école d'apprentissage des techniques apicoles modernes : Utilisation de la technologie pour une apiculture innovante et durable",
   },
   {
     imgSrc: '/img/testimonials/nyuki_tech.jpg',
     name: 'NYUKI TECH',
-    role: 'Store Owner',
-    quote: "NYUKI TECH est une plateforme numérique visant à améliorer et enrichir l'industrie apicole en fournissant des conseils, des itinéraires techniques et des informations sur le marché"
-  },
-  {
-    imgSrc: '/img/testimonials/testimonials-4.jpg',
-    name: 'Matt Brandon',
-    role: 'Freelancer',
-    quote: 'Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim...',
-  },
-  {
-    imgSrc: '/img/testimonials/testimonials-5.jpg',
-    name: 'John Larson',
-    role: 'Entrepreneur',
-    quote: 'Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor...',
+    quote: "NYUKI TECH est une plateforme numérique visant à améliorer et enrichir l'industrie apicole en fournissant des conseils, des itinéraires techniques et des informations sur le marché",
   },
 ];
 
